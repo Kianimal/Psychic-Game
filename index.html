@@ -16,5 +16,20 @@
     <p>Guesses left: <span id = "guessRemain">9</span></p>
 
     <p>Your guesses so far: <span id = "guesses"></span></p>
+
+    <script>
+        var win = 0;
+        var loss = 0;
+        var guessRemain = 9;
+        var guesses = 0;
+        var arrCpuGuess = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p",];
+
+        var cpuGuessNum = Math.floor(Math.random() * 16);
+
+        var guessAgainst = arrCpuGuess[cpuGuessNum];
+
+        console.log(guessAgainst);
+
+    </script>
 </body>
 </html>
