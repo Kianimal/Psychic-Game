@@ -9,20 +9,28 @@
     <h1>The Psychic Game</h1>
     <p>Guess what letter I'm thinking of.</p>
 
-    <p>Wins: <span id ="win">0</span></p>
+    <p>Wins: <span id ="win"></span></p>
 
-    <p>Losses: <span id ="loss">0</span></p>
+    <p>Losses: <span id ="loss"></span></p>
 
     <p>Guesses left: <span id ="guessRemain"></span></p>
 
     <p>Your guesses so far: <span id ="userGuess"></span></p>
 
     <script type="text/javascript">
+
         var win = 0;
         var loss = 0;
         var guessRemain = 9;
+
+        var winContent = document.getElementById("win");
+        var lossContent = document.getElementById("loss");
         var guessRemainContent = document.getElementById("guessRemain");
+
+        winContent.textContent = win;
+        lossContent.textContent = loss;
         guessRemainContent.textContent = guessRemain;
+
         var guess = "";
         var arrCpuGuess = ["a","b","c","d","e","f","g","h","i","j",
                             "k","l","m","n","o","p","q","r","s","t",
@@ -30,19 +38,47 @@
 
         var cpuGuessNum = Math.floor(Math.random() * 26);
 
-        var guessAgainst = arrCpuGuess[cpuGuessNum];
+        function cpuGuess (arrCpuGuess){
+            cpuGuessNum = Math.floor(Math.random() * 26);
+            guessAgainst = arrCpuGuess[cpuGuessNum];
+            return guessAgainst;
+        }
+
+        var guessAgainst = cpuGuess(arrCpuGuess);
 
         console.log(guessAgainst);
 
         var userG = document.getElementById("userGuess");
 
-        document.onkeyup = function(event) {
-        var newDiv = document.createElement("div");
-        guess = event.key;
-        newDiv.textContent = guess;
-        guessRemain--;
-        guessRemainContent.textContent = guessRemain;
-        userG.appendChild(newDiv);
+        for (var i = 0; i < 9; i++) {
+            document.onkeyup = function(event) {
+                var newDiv = document.createElement("div");
+                guess = event.key;
+                newDiv.textContent = guess;
+                if(guess == guessAgainst){
+                    win++;
+                    winContent.textContent = win;
+                    guessAgainst = cpuGuess(arrCpuGuess);
+                    guessRemain = 9;
+                    guessRemainContent.textContent = guessRemain;
+                    userG.innerHTML = "";
+                    console.log(guessAgainst);
+                }
+                if (guessRemain == 0){
+                    loss++;
+                    lossContent.textContent = loss;
+                    guessAgainst = cpuGuess(arrCpuGuess);
+                    guessRemain = 9;
+                    guessRemainContent.textContent = guessRemain;
+                    userG.innerHTML = "";
+                    console.log(guessAgainst);
+                }
+                else{
+                    guessRemain--;
+                    guessRemainContent.textContent = guessRemain;
+                    userG.append(guess + " ");
+                }
+            }
         }
 
     </script>
