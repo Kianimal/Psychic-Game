@@ -50,34 +50,32 @@
 
         var userG = document.getElementById("userGuess");
 
-        for (var i = 0; i < 9; i++) {
-            document.onkeyup = function(event) {
-                var newDiv = document.createElement("div");
-                guess = event.key;
-                newDiv.textContent = guess;
-                if(guess == guessAgainst){
-                    win++;
-                    winContent.textContent = win;
-                    guessAgainst = cpuGuess(arrCpuGuess);
-                    guessRemain = 9;
-                    guessRemainContent.textContent = guessRemain;
-                    userG.innerHTML = "";
-                    console.log(guessAgainst);
-                }
-                if (guessRemain == 0){
-                    loss++;
-                    lossContent.textContent = loss;
-                    guessAgainst = cpuGuess(arrCpuGuess);
-                    guessRemain = 9;
-                    guessRemainContent.textContent = guessRemain;
-                    userG.innerHTML = "";
-                    console.log(guessAgainst);
-                }
-                else{
-                    guessRemain--;
-                    guessRemainContent.textContent = guessRemain;
-                    userG.append(guess + " ");
-                }
+        document.onkeydown = function(event) {
+            var newDiv = document.createElement("div");
+            guess = event.key;
+            newDiv.textContent = guess;
+            if(guess == guessAgainst){
+                win++;
+                winContent.textContent = win;
+                guessAgainst = cpuGuess(arrCpuGuess);
+                guessRemain = 9;
+                guessRemainContent.textContent = guessRemain;
+                userG.innerHTML = "";
+                console.log(guessAgainst);
+            }
+            if (guessRemain == 0){
+                loss++;
+                lossContent.textContent = loss;
+                guessAgainst = cpuGuess(arrCpuGuess);
+                guessRemain = 9;
+                guessRemainContent.textContent = guessRemain;
+                userG.innerHTML = "";
+                console.log(guessAgainst);
+            }
+            else{
+                guessRemain--;
+                guessRemainContent.textContent = guessRemain;
+                userG.append(guess + " ");
             }
         }
 
